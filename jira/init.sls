@@ -21,6 +21,7 @@ unpack-jira-tarball:
     - require:
       - module: jira-stop
       - file: jira-init-script
+      - user: jira
     - listen_in:
       - module: jira-restart
 
@@ -83,6 +84,9 @@ jira-init-script:
     - template: jinja
     - context:
       jira: {{ jira|json }}
+
+jira:
+  user.present
 
 ### FILES ###
 {{ jira.home }}/jira-config.properties:
