@@ -4,11 +4,11 @@
 <jira-database-config>
   <name>defaultDS</name>
   <delegator-name>default</delegator-name>
-  <database-type>postgres72</database-type>
+  <database-type>mysql</database-type>
   <schema-name>public</schema-name>
   <jdbc-datasource>
-    <url>jdbc:postgresql://{{ jira.db_server }}:5432/{{ jira.db_name }}</url>
-    <driver-class>org.postgresql.Driver</driver-class>
+    <url>jdbc:mysql://{{ jira.db_server }}:3306/{{ jira.db_name }}</url>
+    <driver-class>com.mysql.jdbc.Driver</driver-class>
     <username>{{ jira.db_username }}</username>
     <password>{{ jira.db_password }}</password>
     <pool-min-size>20</pool-min-size>
