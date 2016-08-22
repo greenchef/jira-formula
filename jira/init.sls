@@ -15,7 +15,7 @@ unpack-jira-tarball:
     - archive_format: tar
     - user: jira 
     - tar_options: z
-    - if_missing: {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
+    - if_missing: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     - runas: jira
     - keep: True
     - require:
@@ -31,7 +31,7 @@ fix-jira-filesystem-permissions:
     - recurse:
       - user
     - names:
-      - {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
+      - {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
       - {{ jira.home }}
       - {{ jira.log_root }}
     - watch:
@@ -40,7 +40,7 @@ fix-jira-filesystem-permissions:
 create-jira-symlink:
   file.symlink:
     - name: {{ jira.prefix }}/jira
-    - target: {{ jira.prefix }}/atlassian-jira-{{ jira.version }}-standalone
+    - target: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     - user: jira
     - watch:
       - archive: unpack-jira-tarball
