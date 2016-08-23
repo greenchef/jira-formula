@@ -13,10 +13,26 @@ unpack-jira-tarball:
     - source: {{ jira.source_url }}/atlassian-jira-software-{{ jira.version }}.tar.gz
     - source_hash: {{ salt['pillar.get']('jira:source_hash', '') }}
     - archive_format: tar
-    - user: jira 
+    - user: jira
     - tar_options: z
     - if_missing: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     - runas: jira
+    - keep: True
+    - require:
+      - module: jira-stop
+      - file: jira-init-script
+      - user: jira
+    - listen_in:
+      - module: jira-restart
+
+unpack-dbdriver-tarball:
+  archive.extracted:
+    - name: {{ jira.prefix }}/jira/mysql_driver/
+    - source: {{ jira.dbdriver_url }}/mysql-connector-java-{{ jira.dbdriver_version }}.tar.gz
+    - source_hash: {{ salt['pillar.get']('jira:dbdriver_hash', '') }}
+    - archive_format: tar
+    - user: jira
+    - tar_options: z
     - keep: True
     - require:
       - module: jira-stop
@@ -36,6 +52,7 @@ fix-jira-filesystem-permissions:
       - {{ jira.log_root }}
     - watch:
       - archive: unpack-jira-tarball
+      - archive: unpack-dbdriver-tarball
 
 create-jira-symlink:
   file.symlink:
@@ -44,6 +61,7 @@ create-jira-symlink:
     - user: jira
     - watch:
       - archive: unpack-jira-tarball
+      - archive: unpack-dbdriver-tarball
 
 create-logs-symlink:
   file.symlink:
@@ -53,6 +71,7 @@ create-logs-symlink:
     - backupname: {{ jira.prefix }}/jira/old_logs
     - watch:
       - archive: unpack-jira-tarball
+      - archive: unpack-dbdriver-tarball
 
 ### SERVICE ###
 jira-service:
@@ -61,6 +80,7 @@ jira-service:
     - enable: True
     - require:
       - archive: unpack-jira-tarball
+      - archive: unpack-dbdriver-tarball
       - file: jira-init-script
 
 # used to trigger restarts by other states
@@ -129,4 +149,11 @@ jira:
 #     - template: jinja
 #     - watch_in:
 #       - module: jira-restart
+
+{{ jira.prefix }}/jira/lib/mysql_driver:
+  file.managed:
+    - source: {{ jira.prefix }}/jira/mysql_driver/mysql-connector-java-{{ jira.dbdriver_version }}-bin.jar
+    - user: {{ jira.user }}
+    - watch_in:
+      - module: jira-restart
 

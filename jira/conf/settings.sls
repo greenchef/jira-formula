@@ -5,6 +5,7 @@
 {%- set default_version      = '6.4' %}
 {%- set default_prefix       = '/opt' %}
 {%- set default_source_url   = 'https://downloads.atlassian.com/software/jira/downloads' %}
+{%- set default_dbdriver_url = 'https://dev.mysql.com/get/Downloads/Connector-J/' %}
 {%- set default_log_root     = '/var/log/jira' %}
 {%- set default_jira_user    = 'jira' %}
 {%- set default_db_server    = 'localhost' %}
@@ -16,7 +17,9 @@
 {%- set default_jvm_MaxPermSize = '384m' %}
 
 {%- set version        = g.get('version', p.get('version', default_version)) %}
+{%- set dbdriver_version = g.get('dbdriver_version', p.get('dbdriver_version', default_version)) %}
 {%- set source_url     = g.get('source_url', p.get('source_url', default_source_url)) %}
+{%- set dbdriver_url   = g.get('dbdriver_url', p.get('dbdriver_url', default_dbdriver_url)) %}
 {%- set log_root       = g.get('log_root', p.get('log_root', default_log_root)) %}
 {%- set prefix         = g.get('prefix', p.get('prefix', default_prefix)) %}
 {%- set jira_user      = g.get('user', p.get('user', default_jira_user)) %}
