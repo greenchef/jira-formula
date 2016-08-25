@@ -37,6 +37,7 @@
 {%- set jira = {} %}
 {%- do jira.update( { 'version'        : version,
                       'source_url'     : source_url,
+                      'dbdriver_url'   : dbdriver_url,
                       'log_root'       : log_root,
                       'home'           : jira_home,
                       'prefix'         : prefix,
