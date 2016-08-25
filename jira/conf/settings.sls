@@ -38,6 +38,7 @@
 {%- do jira.update( { 'version'        : version,
                       'source_url'     : source_url,
                       'dbdriver_url'   : dbdriver_url,
+                      'dbdriver_version': dbdriver_version,
                       'log_root'       : log_root,
                       'home'           : jira_home,
                       'prefix'         : prefix,
