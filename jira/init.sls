@@ -152,7 +152,7 @@ jira:
 
 {{ jira.prefix }}/jira/lib/mysql_driver:
   file.managed:
-    - source: {{ jira.prefix }}/jira/mysql_driver/mysql-connector-java-{{ jira.dbdriver_version }}-bin.jar
+    - source: {{ jira.prefix }}/jira/mysql_driver/mysql-connector-java-{{ jira.dbdriver_version }}/mysql-connector-java-{{ jira.dbdriver_version }}-bin.jar
     - user: {{ jira.user }}
     - watch_in:
       - module: jira-restart
