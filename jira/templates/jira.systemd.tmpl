@@ -3,6 +3,7 @@ Description=Jira Issue Tracker
 After=network.target auditd.service
 
 [Service]
+Environment="JIRA_HOME={{ jira.home }}"
 ExecStartPre=cd {{ jira.prefix }}/jira/logs
 ExecStart={{ jira.prefix }}/jira/bin/startup.sh
 ExecStop={{ jira.prefix }}/jira/bin/shutdown.sh
