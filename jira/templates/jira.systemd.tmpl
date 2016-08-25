@@ -1,0 +1,17 @@
+[Unit]
+Description=Jira Issue Tracker
+After=network.target auditd.service
+
+[Service]
+ExecStartPre=cd {{ jira.prefix }}/jira/logs
+ExecStart={{ jira.prefix }}/jira/bin/startup.sh
+ExecStop={{ jira.prefix }}/jira/bin/shutdown.sh
+KillMode=process
+Restart=on-failure
+RestartPreventExitStatus=255
+PIDFile={{ jira.prefix }}/jira/work/catalina.pid
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+Alias=jira.service

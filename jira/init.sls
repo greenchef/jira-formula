@@ -96,14 +96,22 @@ jira-stop:
 
 jira-init-script:
   file.managed:
-    - name: '/etc/init.d/jira'
-    - source: salt://jira/templates/jira.init.tmpl
+    - name: '/lib/systemd/system/jira.service'
+    - source: salt://jira/templates/jira.systemd.tmpl
     - user: root
     - group: root
-    - mode: 0755
+    - mode: 0644
     - template: jinja
     - context:
       jira: {{ jira|json }}
+
+create-jira-service-symlink:
+  file.symlink:
+    - name: '/etc/systemd/system/jira.service'
+    - target: '/lib/systemd/system/jira.service'
+    - user: root
+    - watch:
+      - file: jira-init-script
 
 jira:
   user.present
