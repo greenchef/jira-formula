@@ -4,6 +4,7 @@ After=network.target auditd.service
 
 [Service]
 Environment="JIRA_HOME={{ jira.home }}"
+Environment="JAVA_HOME=/usr/lib/java"
 ExecStartPre=cd {{ jira.prefix }}/jira/logs
 ExecStart={{ jira.prefix }}/jira/bin/startup.sh
 ExecStop={{ jira.prefix }}/jira/bin/shutdown.sh
