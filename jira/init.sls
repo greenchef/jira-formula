@@ -133,6 +133,21 @@ jira:
     - listen_in:
       - module: jira-restart
 
+{{ jira.prefix }}/jira/conf/server.xml:
+  file.managed:
+    - source: salt://jira/templates/server.xml.tmpl
+    - user: {{ jira.user }}
+    - template: jinja
+    - listen_in:
+      - module: jira-restart
+
+{{ jira.prefix }}/jira/jira.jks:
+  file.managed:
+    - source: salt://salt/files/jira.jks
+    - user: {{ jira.user }}
+    - listen_in:
+      - module: jira-restart
+
 {{ jira.prefix }}/jira/atlassian-jira/WEB-INF/classes/jira-application.properties:
   file.managed:
     - source: salt://jira/templates/jira-application.properties.tmpl

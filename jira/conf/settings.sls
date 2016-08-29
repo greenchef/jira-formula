@@ -12,6 +12,7 @@
 {%- set default_db_name      = 'jira' %}
 {%- set default_db_username  = 'jira' %}
 {%- set default_db_password  = 'jira' %}
+{%- set default_jks_password = 'changeit' %}
 {%- set default_jvm_Xms      = '384m' %}
 {%- set default_jvm_Xmx      = '768m' %}
 {%- set default_jvm_MaxPermSize = '384m' %}
@@ -27,6 +28,7 @@
 {%- set db_name        = g.get('db_name', p.get('db_name', default_db_name)) %}
 {%- set db_username    = g.get('db_username', p.get('db_username', default_db_username)) %}
 {%- set db_password    = g.get('db_password', p.get('db_password', default_db_password)) %}
+{%- set jks_password   = g.get('jks_password', p.get('jks_password', default_jks_password)) %}
 {%- set jvm_Xms        = g.get('jvm_Xms', p.get('jvm_Xms', default_jvm_Xms)) %}
 {%- set jvm_Xmx        = g.get('jvm_Xmx', p.get('jvm_Xmx', default_jvm_Xmx)) %}
 {%- set jvm_MaxPermSize = g.get('jvm_MaxPermSize', p.get('jvm_MaxPermSize', default_jvm_MaxPermSize)) %}
@@ -47,6 +49,7 @@
                       'db_name'        : db_name,
                       'db_username'    : db_username,
                       'db_password'    : db_password,
+                      'jks_password'   : jks_password,
                       'jvm_Xms'        : jvm_Xms,
                       'jvm_Xmx'        : jvm_Xmx,
                       'jvm_MaxPermSize': jvm_MaxPermSize,
