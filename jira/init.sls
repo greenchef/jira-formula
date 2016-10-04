@@ -180,3 +180,13 @@ jira:
     - watch_in:
       - module: jira-restart
 
+/opt/sumologic/sumocollector/sources/jira.json:
+  file.serialize:
+    - user: {{ jira.user }}
+    - formatter: json
+    - dataset:
+      "api.version": "v1"
+      source:
+        - sourceType: LocalFile
+          name: Jira
+          pathExpression: "{{ jira.prefix }}/jira/logs/catalina.out"
