@@ -187,6 +187,6 @@ jira:
     - dataset:
         "api.version": "v1"
         source:
-          - sourceType: LocalFile
-            name: Jira
-            pathExpression: "{{ jira.prefix }}/jira/logs/catalina.out"
+          sourceType: LocalFile
+          name: Jira
+          pathExpression: "{{ jira.prefix }}/jira/logs/catalina.out"
