@@ -133,6 +133,29 @@ jira:
     - listen_in:
       - module: jira-restart
 
+{{ jira.home }}/plugins:
+  file.symlink:
+    - name: {{ jira.home }}/plugins
+    - target: /mnt/plugins
+    - user: jira
+    - watch:
+      - archive: unpack-jira-tarball
+
+{{ jira.home }}/export:
+  file.symlink:
+    - name: {{ jira.home }}/export
+    - target: /mnt/export
+    - user: jira
+    - watch:
+      - archive: unpack-jira-tarball
+
+{{ jira.home }}/data:
+  file.symlink:
+    - name: {{ jira.home }}/data
+    - target: /mnt/data
+    - user: jira
+    - watch:
+      - archive: unpack-jira-tarball
 {{ jira.prefix }}/jira/conf/server.xml:
   file.managed:
     - source: salt://jira/templates/server.xml.tmpl
