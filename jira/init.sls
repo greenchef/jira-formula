@@ -229,4 +229,4 @@ jira:
 {% endif %}
 
           # Set the sourceCategory
-          sourceCategory: "{{cluster}}/{{app}}/jira"
+          category: "{{cluster}}/{{app}}/jira"
