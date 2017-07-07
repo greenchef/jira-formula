@@ -14,7 +14,8 @@ unpack-jira-tarball:
     - source_hash: {{ salt['pillar.get']('jira:source_hash', '') }}
     - archive_format: tar
     - user: jira
-    - tar_options: z
+    - group: root
+    - options: z
     - if_missing: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     - runas: jira
     - keep: True
@@ -32,7 +33,8 @@ unpack-dbdriver-tarball:
     - source_hash: {{ salt['pillar.get']('jira:dbdriver_hash', '') }}
     - archive_format: tar
     - user: jira
-    - tar_options: z
+    - group: root
+    - options: z
     - keep: True
     - require:
       - module: jira-stop
