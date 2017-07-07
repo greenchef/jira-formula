@@ -16,6 +16,7 @@ unpack-jira-tarball:
     - user: jira
     - group: root
     - options: z
+    - unless: jira-service
     - if_missing: {{ jira.prefix }}/atlassian-jira-software-{{ jira.version }}-standalone
     - runas: jira
     - keep: True
